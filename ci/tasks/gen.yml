@@ -1,0 +1,20 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: alpine
+    tag: "3.6"
+
+outputs: 
+- name: gen
+
+run:
+  path: sh
+  dir: gen
+  args:
+  - -exc
+  - |
+    x=$RANDOM
+    echo $x > $x

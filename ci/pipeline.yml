@@ -6,11 +6,18 @@ resource_types:
 
 gate-source: &gate-source
   git: 
-    uri: https://github.com/Meshcloud/gate-resource-example
+    uri: git@github.com:Meshcloud/gate-resource-example.git
     private_key: ((github-key-readwrite))
     branch: gates
 
 resources:
+  - name: repo
+    type: git
+    source:
+      uri: git@github.com:Meshcloud/gate-resource-example.git
+      private_key: ((github-key-readwrite))
+      branch: master
+
   - name: a-gate
     type: gate-resource
     source:
@@ -30,7 +37,16 @@ resources:
       gate: autogate
 
 jobs:
-  - name: push
+  - name: push-a
+    plan:
+    - get: repo
+    - task: gen
+      file: repo/ci/tasks/gen.yml
+    - put: a-gate
+      params:
+        item_file: gen/*
+
+  - name: fetch
     plan:
       - get: a-gate
         trigger: true
