@@ -1,0 +1,39 @@
+resource_types:
+- name: gate-resource
+  type: docker-image
+  source:
+    repository: meshcloud/gate-resource
+
+gate-source: &gate-source
+  uri: https://github.com/Meshcloud/gate-resource-example
+  private_key: ((github-key-readwrite))
+  branch: master
+
+resources:
+  - name: a-gate
+    type: gate-resource
+    source:
+      <<: *gate-source
+      gate: a
+
+  - name: b-gate
+    type: gate-resource
+    source:
+      <<: *gate-source
+      gate: b
+
+  - name: auto-gate
+    type: gate-resource
+    source:
+      <<: *gate-source
+      gate: autogate
+
+jobs:
+  - name: push
+    plan:
+      - get: a-gate
+        trigger: true
+      - get: b-gate
+        trigger: true
+      - get: auto-gate
+        trigger: true
