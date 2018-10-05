@@ -5,9 +5,10 @@ resource_types:
     repository: meshcloud/gate-resource
 
 gate-source: &gate-source
-  uri: https://github.com/Meshcloud/gate-resource-example
-  private_key: ((github-key-readwrite))
-  branch: master
+  git: 
+    uri: https://github.com/Meshcloud/gate-resource-example
+    private_key: ((github-key-readwrite))
+    branch: gates
 
 resources:
   - name: a-gate
