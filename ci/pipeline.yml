@@ -45,12 +45,25 @@ jobs:
     - put: a-gate
       params:
         item_file: gen/*
-
-  - name: fetch
+  
+  - name: push-b
     plan:
-      - get: a-gate
-        trigger: true
-      - get: b-gate
-        trigger: true
-      - get: auto-gate
-        trigger: true
+    - get: repo
+    - task: gen
+      file: repo/ci/tasks/gen.yml
+    - put: b-gate
+      params:
+        item_file: gen/*
+
+  - name: autogate
+    plan:
+      - aggregate:
+        - get: a-gate
+          trigger: true
+        - get: b-gate
+          trigger: true
+        - get: auto-gate
+          trigger: true
+      - put: auto-gate
+        params:
+          update_autoclose: true
