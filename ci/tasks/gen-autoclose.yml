@@ -21,6 +21,6 @@ run:
   - -exc
   - |
     # create a new autoclose gate based on the items that passed through a-gate and b-gate
-    x=$RANDOM
-    cat ../a-gate/passed >> $x
-    cat ../b-gate/passed >> $x
+    gate="$RANDOM.autoclose"
+    cat ../a-gate/passed >> "$gate"
+    cat ../b-gate/passed >> "$gate"
