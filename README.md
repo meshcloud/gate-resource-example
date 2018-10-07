@@ -2,7 +2,9 @@
 
 An example pipeline for the [gate resource](https://github.com/Meshcloud/gate-resource).
 
-> The [gates branch] of this repo contains https://github.com/Meshcloud/gate-resource-example/tree/gates the state of all gates used in this pipeline.
+> The [gates branch](https://github.com/Meshcloud/gate-resource-example/tree/gates) of this repo contains the state of all gates used in this pipeline.
+
+![Pipeline](pipeline.png "Pipeline")
 
 ## Gates
 
