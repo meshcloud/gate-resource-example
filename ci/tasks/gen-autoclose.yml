@@ -1,0 +1,26 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: alpine
+    tag: "3.6"
+
+inputs:
+- name: a-gate
+- name: b-gate
+
+outputs: 
+- name: gen
+
+run:
+  path: sh
+  dir: gen
+  args:
+  - -exc
+  - |
+    # create a new autoclose gate based on the items that passed through a-gate and b-gate
+    x=$RANDOM
+    cat ../a-gate/passed >> $x
+    cat ../b-gate/passed >> $x

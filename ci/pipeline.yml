@@ -41,7 +41,7 @@ jobs:
     plan:
     - get: repo
     - task: gen
-      file: repo/ci/tasks/gen.yml
+      file: repo/ci/tasks/gen-simple.yml
     - put: a-gate
       params:
         item_file: gen/*
@@ -50,19 +50,29 @@ jobs:
     plan:
     - get: repo
     - task: gen
-      file: repo/ci/tasks/gen.yml
+      file: repo/ci/tasks/gen-simple.yml
     - put: b-gate
       params:
         item_file: gen/*
+    
+  - name: push-autogate
+    plan:
+    - get: repo
+    - aggregate:
+      - get: a-gate
+      - get: b-gate
+    - task: gen
+      file: repo/ci/tasks/gen-autoclose.yml
+    - put: auto-gate
+      params:
+        item_file: gen/*
 
-  - name: autogate
+  - name: autoclose-autogate
     plan:
       - aggregate:
         - get: a-gate
           trigger: true
         - get: b-gate
-          trigger: true
-        - get: auto-gate
           trigger: true
       - put: auto-gate
         params:
