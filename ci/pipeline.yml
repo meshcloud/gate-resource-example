@@ -77,3 +77,12 @@ jobs:
       - put: auto-gate
         params:
           update_autoclose: true
+
+  - name: echo
+    plan:
+      - aggregate:
+        - get: repo
+        - get: auto-gate
+          passed: [ "autoclose-autogate" ]
+      - task: echo
+        file: repo/ci/tasks/echo.yml
