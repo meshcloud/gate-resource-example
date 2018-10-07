@@ -83,6 +83,7 @@ jobs:
       - aggregate:
         - get: repo
         - get: auto-gate
-          passed: [ "autoclose-autogate" ]
+          trigger: true
+          version: every
       - task: echo
         file: repo/ci/tasks/echo.yml
