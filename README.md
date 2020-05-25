@@ -11,7 +11,7 @@ An example pipeline for the [gate resource](https://github.com/Meshcloud/gate-re
 This pipeline has the following gates: 
 
 - `a-gate`: a simple gate
-- `b-gate`: anoter simple gate
+- `b-gate`: another simple gate
 - `auto-gate`: an auto-gate with items that automatically close when a combination of items passed through gates `a` and `b`
 
 ## HowTo & Jobs
